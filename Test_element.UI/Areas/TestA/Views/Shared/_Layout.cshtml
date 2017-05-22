@@ -9,6 +9,7 @@
     @Styles.Render("~/Content/element")
     @Scripts.Render("~/bundles/vue")
     @Scripts.Render("~/bundles/element")
+    @Scripts.Render("~/bundles/axios")
 
 </head>
 <body>
@@ -20,6 +21,9 @@
             </el-menu-item>
             <el-menu-item index="2">
                 @Html.ActionLink("登录", "Login", "Account")
+            </el-menu-item>
+            <el-menu-item index="3">
+                @Html.ActionLink("客户管理", "Index", "Customer")
             </el-menu-item>
         </el-menu>
     </div>
@@ -41,7 +45,7 @@
         new Ctor().$mount('#app')
     </script>
 
-    <div >
+    <div>
         @RenderBody()
         <hr />
         <footer>

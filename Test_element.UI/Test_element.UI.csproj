@@ -141,6 +141,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\TestA\Controllers\AccountController.cs" />
+    <Compile Include="Areas\TestA\Controllers\CustomerController.cs" />
     <Compile Include="Areas\TestA\Controllers\HomeController.cs" />
     <Compile Include="Areas\TestA\Models\AccountLoginModel.cs" />
     <Compile Include="Areas\TestA\TestAAreaRegistration.cs" />
@@ -405,6 +406,7 @@
     <Content Include="Areas\TestD\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\TestD\Views\_ViewStart.cshtml" />
     <Content Include="Areas\TestD\Views\Home\Index.cshtml" />
+    <Content Include="Areas\TestA\Views\Customer\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
