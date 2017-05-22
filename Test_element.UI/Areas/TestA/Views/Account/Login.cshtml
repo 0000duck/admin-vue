@@ -1,0 +1,175 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+
+    @Styles.Render("~/Content/element")
+    @Scripts.Render("~/bundles/vue")
+    @Scripts.Render("~/bundles/element")
+    @Scripts.Render("~/bundles/axios")
+
+    <style>
+        #login-page {
+            width: 100vw;
+            height: 100vh;
+            -ms-flex-pack: center;
+            justify-content: center;
+            background: #efeeee;
+        }
+
+        #login-page .login-form, #login-page {
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-align: center;
+            align-items: center;
+        }
+
+        #login-page .login-form {
+            -ms-flex-direction: column;
+            flex-direction: column;
+            width: 500px;
+            height: 400px;
+            border-radius: 10px;
+            background: #fff;
+            border: 1px solid #eaeaea;
+            box-shadow: 0 0 25px #cac6c6;
+        }
+
+        #login-page .login-form .title {
+            color: #20a0ff;
+            font-weight: 700;
+            font-size: 40px;
+            text-align: center;
+            line-height: 2.2;
+            font-family: sans-serif;
+        }
+
+        #login-page .login-form .input-group {
+            margin-top: 30px;
+            width: 80%;
+        }
+
+        #login-page .login-form .input-group button {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div id="login-page" v-on:keyup.enter="login">
+            <div class="login-form">
+                <div class="input-group">
+                    <div class="title">平台入口</div>
+                    <el-input v-bind:autofocus="true"
+                              placeholder="请输入用户名"
+                              icon="time"
+                              v-model="username">
+                    </el-input>
+                </div>
+                <div class="input-group">
+                    <el-input placeholder="请输入密码"
+                              type="password"
+                              icon="time"
+                              v-model="password">
+                    </el-input>
+                </div>
+                <div class="input-group">
+                    <label>记住我？</label>
+                    <el-switch v-model="rememberMe"
+                               on-text=""
+                               off-text="">
+                    </el-switch>
+                </div>
+                <div class="input-group">
+                    <el-button v-on:click.native="login" type="primary" v-bind:loading="isBtnLoading">{{btnText}}</el-button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var base = "/TestA/Account";
+        var requestLogin = function (params) {
+            return axios.post(base + "/login", params).then(function (res) {
+                return JSON.parse(res.data);
+            });
+        };
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                username: '',
+                password: '',
+                rememberMe: false,
+                isBtnLoading: false
+            },
+            computed: {
+                btnText() {
+                    if (this.isBtnLoading) return '登录中...';
+                    return '登录';
+                }
+            },
+            methods: {
+                login() {
+                    if (!this.username) {
+                        this.$message.error('请填写用户名！！！');
+                        return;
+                    }
+                    if (!this.password) {
+                        this.$message.error('请填写密码');
+                        return;
+                    }
+                    var loginParams = { account: this.username, password: this.password };
+                    this.isBtnLoading = true;
+                    requestLogin(loginParams).then(data => {
+                        this.isBtnLoading = false;
+
+                        var msg = data.msg;
+                        var success = data.success;
+                        var user = data.body;
+
+                        if (success) {
+                            localStorage.setItem('user', JSON.stringify(user));
+                            this.saveAccountPwd();
+
+                            this.$message(msg);
+                            //跳转到主页
+                            window.location.href = "/TestA/Home/Index";
+                        } else {
+                            this.$message.error(msg);
+                        }
+
+                    });
+                },
+                saveAccountPwd() {
+                    if (this.rememberMe) {
+                        localStorage.setItem('account', this.username);
+                        localStorage.setItem('passowrd', this.password);
+                    }
+                    else {
+                        localStorage.removeItem('account');
+                        localStorage.removeItem('passowrd');
+                    }
+                },
+
+            },
+            created: function () {
+                var account = localStorage.getItem('account');
+                var password = localStorage.getItem('passowrd');
+                if (account != null && password != null) {
+                    this.username = account;
+                    this.password = password;
+                }
+            },
+        });
+
+    </script>
+</body>
+</html>

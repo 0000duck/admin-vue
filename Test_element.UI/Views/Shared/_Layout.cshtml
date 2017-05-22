@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - 主基地</title>
+
+
+    @Styles.Render("~/Content/element")
+    @Scripts.Render("~/bundles/vue")
+    @Scripts.Render("~/bundles/element")
+
+</head>
+<body>
+    <div id="app">
+        <el-menu theme="dark" default-active="activeIndex" class="el-menu-demo" mode="horizontal" v-on:select="handleSelect">
+            <el-menu-item index="0">主基地</el-menu-item>
+            <el-menu-item index="1">
+                @Html.ActionLink("主页", "Index", "Home")
+            </el-menu-item>
+            <el-menu-item index="1">
+                @Html.ActionLink("关于", "About", "Home")
+            </el-menu-item>
+            <el-menu-item index="3">
+                @Html.ActionLink("联系方式", "Contact", "Home")
+            </el-menu-item>
+        </el-menu>
+    </div>
+    <script>
+        var Main = {
+            data() {
+                return {
+                    activeIndex: '1'
+                };
+            },
+            methods: {
+                handleSelect(key, keyPath) {
+                    console.log(key, keyPath);
+                }
+            }
+        }
+        var Ctor = Vue.extend(Main)
+        new Ctor().$mount('#app')
+    </script>
+
+    <div>
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - 我的 ASP.NET 应用程序</p>
+        </footer>
+    </div>
+
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

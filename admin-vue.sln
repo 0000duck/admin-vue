@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test_iview", "Test_iview\Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test_iview.UI", "Test_iview.UI\Test_iview.UI.csproj", "{6B8FC959-9F47-4C73-9071-2D21B0E2649F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "iview", "iview", "{2A35A9D7-A80F-4898-85C2-321FC7632DE3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test_element.UI", "Test_element.UI\Test_element.UI.csproj", "{E3889BD2-A40A-419E-91DC-EBC2F951FEA7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,8 +31,17 @@ Global
 		{6B8FC959-9F47-4C73-9071-2D21B0E2649F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B8FC959-9F47-4C73-9071-2D21B0E2649F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B8FC959-9F47-4C73-9071-2D21B0E2649F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3889BD2-A40A-419E-91DC-EBC2F951FEA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3889BD2-A40A-419E-91DC-EBC2F951FEA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3889BD2-A40A-419E-91DC-EBC2F951FEA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3889BD2-A40A-419E-91DC-EBC2F951FEA7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C025AEDB-443F-4EA6-85DE-A936CFF30171} = {2A35A9D7-A80F-4898-85C2-321FC7632DE3}
+		{0781D377-27CD-497C-A6B9-5AED608F3732} = {2A35A9D7-A80F-4898-85C2-321FC7632DE3}
+		{6B8FC959-9F47-4C73-9071-2D21B0E2649F} = {2A35A9D7-A80F-4898-85C2-321FC7632DE3}
 	EndGlobalSection
 EndGlobal
