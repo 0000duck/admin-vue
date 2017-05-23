@@ -35,20 +35,14 @@
 
 <div id="main">
     <div id="ListWithFiltersPage">
-
-        <!-- breadcrumb start  -->
-        <db-breadcrumb></db-breadcrumb>
-        <!-- breadcrumb end  -->
-
         <div class="db-content-inner">
-
             <!-- filters start -->
             <div class="filters">
                 <div class="filter">
                     <el-select v-model="filters.labelVal" clearable placeholder="请选择">
                         <el-option v-for="item in selectedOptions"
-                                   label="item.label"
-                                   value="item.value">
+                                   v-bind:label="item.label"
+                                   v-bind:value="item.value">
                         </el-option>
                     </el-select>
                     <el-input placeholder="请输入年龄" v-model="filters.age" v-show="filters.labelVal == '1'"></el-input>
@@ -63,17 +57,17 @@
             </div>
             <!-- filters end -->
             <!-- table start  -->
-            <el-table data="users" ref="table" style="width: 100%" element-loading-text="拼命加载中"
+            <el-table v-bind:data="customers" ref="table" style="width: 100%" element-loading-text="拼命加载中"
                       stripe
                       v-loading="loading"
                       v-on:selection-change="handleSelectionChange"
                       v-on:sort-change="handleSortChange">
-                <el-table-column type="selection" width="55" reserve-selection="reserveSelection"></el-table-column>
-                <el-table-column prop="date" label="出生日期" formatter="formatDate" width="180"></el-table-column>
+                <el-table-column type="selection" width="55" v-bind:reserve-selection="reserveSelection"></el-table-column>
+                <el-table-column prop="date" label="出生日期" v-bind:formatter="formatDate" width="180"></el-table-column>
                 <el-table-column prop="name" label="姓名"></el-table-column>
                 <el-table-column prop="age" sortable="custom" label="年龄"></el-table-column>
                 <el-table-column prop="address" label="地址"></el-table-column>
-                <el-table-column context="_self" width="150" inline-template label="操作">
+                <el-table-column v-bind:context="_self" width="150" inline-template label="操作">
                     <div>
                         <el-button size="small" v-on:click="handleEdit($index, row)">编辑</el-button>
                         <el-button size="small" type="danger" v-on:click="handleDelete($index, row)">删除</el-button>
@@ -84,14 +78,14 @@
             <!-- pagination start  -->
             <div class="pagination-wrapper" v-show="!loading">
                 <el-pagination layout="prev, pager, next"
-                               v-on:current -change="handleCurrentChange"
-                               page-size="20">
+                               v-on:current-change="handleCurrentChange"
+                               v-bind:page-size="20">
                 </el-pagination>
             </div>
             <!-- pagination end  -->
             <!-- edit dialog start -->
             <el-dialog title="编辑" v-model="editDialog" size="tiny">
-                <el-form ref="editForm" model="editForm" label-width="80px">
+                <el-form ref="editForm" v-bind:model="editForm" label-width="80px">
                     <el-form-item label="姓名">
                         <el-input v-model="editForm.name" class="el-col-24"></el-input>
                     </el-form-item>
@@ -102,14 +96,16 @@
                     </el-form-item>
                 </el-form>
                 <span slot="footer" class="dialog-footer">
-                    <el-button v-on:click="editDialog = false">取 消</el-button>
+                    <el-button v-on:click="editDialog = false">
+                        取 消
+                    </el-button>
                     <el-button type="primary" v-on:click="handleEditSave()">确 定</el-button>
                 </span>
             </el-dialog>
             <!-- edit dialog end -->
             <!-- create dialog start -->
             <el-dialog title="保存" v-model="createDialog" size="tiny">
-                <el-form ref="createFrom" model="createForm" label-width="80px">
+                <el-form ref="createFrom" v-bind:model="createForm" label-width="80px">
                     <el-form-item label="姓名">
                         <el-input v-model="createForm.name" class="el-col-24"></el-input>
                     </el-form-item>
@@ -123,7 +119,9 @@
                     </el-form-item>
                 </el-form>
                 <span slot="footer" class="dialog-footer">
-                    <el-button v-on:click="createDialog = false">取 消</el-button>
+                    <el-button v-on:click="createDialog = false">
+                        取 消
+                    </el-button>
                     <el-button type="primary" v-on:click="handleSave()">确 定</el-button>
                 </span>
             </el-dialog>
@@ -131,13 +129,19 @@
         </div>
     </div>
 </div>
-
 <script>
+    var base = "/TestA";
+
+    var fetchList = params => { return axios.get(`${base}/Customer/list`, { params: params }).then(res => JSON.parse(res.data)); };
+    var addUser = params => { return axios.post(`${base}/Customer/add`, params).then(res => JSON.parse(res.data)); };
+    var editUser = params => { return axios.post(`${base}/Customer/edit`, params).then(res => JSON.parse(res.data)); };
+    var removeUser = params => { return axios.post(`${base}/Customer/remove`, params).then(res => JSON.parse(res.data)); };
+
     var main = new Vue({
         el: '#main',
 
         data: {
-            users: [],
+            customers: [],
             total: 0,
             page: 0,
             loading: true,
@@ -265,13 +269,15 @@
                 //      console.log(options);
 
                 this.loading = true;
-                fetchList(options).then((res) => {
+                fetchList(options).then((data) => {
+
                     // clear selection
                     this.$refs.table.clearSelection();
                     // lazy render data
-                    this.users = res.data.users;
-                    this.total = res.data.total;
+                    this.customers = data.body.customers;
+                    this.total = data.body.total;
                     this.loading = false;
+
                 });
             }
         },

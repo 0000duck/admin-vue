@@ -95,9 +95,9 @@
     </div>
 
     <script>
-        var base = "/TestA/Account";
+        var base = "/TestA";
         var requestLogin = function (params) {
-            return axios.post(base + "/login", params).then(function (res) {
+            return axios.post(base + "/Account/login", params).then(function (res) {
                 return JSON.parse(res.data);
             });
         };
@@ -128,9 +128,10 @@
                     }
                     var loginParams = { account: this.username, password: this.password };
                     this.isBtnLoading = true;
-                    requestLogin(loginParams).then(data => {
-                        this.isBtnLoading = false;
 
+                    requestLogin(loginParams).then(function (data) {
+
+                        this.isBtnLoading = false;
                         var msg = data.msg;
                         var success = data.success;
                         var user = data.body;
@@ -145,7 +146,6 @@
                         } else {
                             this.$message.error(msg);
                         }
-
                     });
                 },
                 saveAccountPwd() {

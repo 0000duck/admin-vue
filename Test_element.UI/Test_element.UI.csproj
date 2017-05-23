@@ -143,7 +143,9 @@
     <Compile Include="Areas\TestA\Controllers\AccountController.cs" />
     <Compile Include="Areas\TestA\Controllers\CustomerController.cs" />
     <Compile Include="Areas\TestA\Controllers\HomeController.cs" />
+    <Compile Include="Areas\TestA\Controllers\ResumeController.cs" />
     <Compile Include="Areas\TestA\Models\AccountLoginModel.cs" />
+    <Compile Include="Areas\TestA\Models\CustomerListModel.cs" />
     <Compile Include="Areas\TestA\TestAAreaRegistration.cs" />
     <Compile Include="Areas\TestB\Controllers\HomeController.cs" />
     <Compile Include="Areas\TestB\TestBAreaRegistration.cs" />
@@ -154,6 +156,7 @@
     <Compile Include="Common\CommonJson.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Entities\AdminVueModel.cs" />
+    <Compile Include="Entities\Customer.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -407,6 +410,10 @@
     <Content Include="Areas\TestD\Views\_ViewStart.cshtml" />
     <Content Include="Areas\TestD\Views\Home\Index.cshtml" />
     <Content Include="Areas\TestA\Views\Customer\Index.cshtml" />
+    <Content Include="Areas\TestA\Views\Customer\users.json" />
+    <Content Include="Areas\TestA\Views\Resume\Index.cshtml" />
+    <Content Include="Areas\TestA\Views\Resume\TestForm.cshtml" />
+    <Content Include="Areas\TestA\Views\Resume\SetRole.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

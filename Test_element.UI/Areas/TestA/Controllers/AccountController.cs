@@ -26,6 +26,12 @@ namespace Test_element.UI.Areas.TestA.Controllers
         [HttpPost]
         public JsonResult Login(AccountLoginModel model)
         {
+            if (!ModelState.IsValid)
+            {
+
+            }
+
+
             AjaxResult ajaxResult = null;
 
             var user = db.Users.SingleOrDefault(p => p.Account == model.Account && p.Password == model.Password);
