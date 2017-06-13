@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,12 +17,12 @@ namespace Test_element.UI.Areas.TestA.Controllers
         AdminVueModel db = new AdminVueModel();
 
 
-
         [HttpGet]
         public ActionResult Login()
         {
             return View();
         }
+
 
         [HttpPost]
         public JsonResult Login(AccountLoginModel model)
@@ -31,13 +32,13 @@ namespace Test_element.UI.Areas.TestA.Controllers
 
             }
 
-
             AjaxResult ajaxResult = null;
 
             var user = db.Users.SingleOrDefault(p => p.Account == model.Account && p.Password == model.Password);
 
             if (user != null)
             {
+                SaveSession(user);
                 ajaxResult = new AjaxResult()
                 {
                     Success = true,
@@ -63,11 +64,66 @@ namespace Test_element.UI.Areas.TestA.Controllers
 
             return new JsonResult() { ContentEncoding = Encoding.UTF8, Data = CommonJson.camelJson(ajaxResult) };
         }
+        
+        
+        [HttpGet]
+        public ActionResult LogOff()
+        {
+            Session.Clear();
+            return RedirectToAction("Login", "Account");
+        }
 
 
         public ActionResult UpdatePassword()
         {
             return View();
         }
+
+
+        /// <summary>
+        /// 保存会话
+        /// </summary>
+        /// <param name="user"></param>
+        private void SaveSession(User user)
+        {
+            var userSession = new AccountSessionModel()
+            {
+                UserId = user.Id,
+                Account = user.Account,
+                NickName = user.NickName
+            };
+            
+            var userMenus = db.vUserMenus.Where(p => p.UserId == user.Id).Select(pm => new MenuModel()
+            {
+                MenuId = pm.Id,
+                MenuName = pm.Name,
+                MenuUrl = pm.Href.ToLower(),
+                ParentId = pm.ParentId,
+                MenuCss = pm.IconInfo,
+                Order = pm.OrderId
+
+            }).ToList();
+
+            var userPermissions = db.vUserPermissions.Where(p => p.UserId == user.Id).Select(p => new PermissionModel()
+            {
+                Name = p.Name,
+                Url = p.Href.ToLower()
+
+            }).ToList();
+
+            try
+            {
+                userSession.MenuList = userMenus;
+                userSession.PermissionDic = userPermissions.ToDictionary(k => k.Url, v => v.Name);
+                
+                Session[ConstantParam.SESSION_USER] = CommonSession.SessionSatae_Serialize(userSession);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
     }
 }

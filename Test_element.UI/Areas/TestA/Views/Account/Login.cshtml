@@ -24,41 +24,41 @@
             background: #efeeee;
         }
 
-        #login-page .login-form, #login-page {
-            display: -ms-flexbox;
-            display: flex;
-            -ms-flex-align: center;
-            align-items: center;
-        }
+            #login-page .login-form, #login-page {
+                display: -ms-flexbox;
+                display: flex;
+                -ms-flex-align: center;
+                align-items: center;
+            }
 
-        #login-page .login-form {
-            -ms-flex-direction: column;
-            flex-direction: column;
-            width: 500px;
-            height: 400px;
-            border-radius: 10px;
-            background: #fff;
-            border: 1px solid #eaeaea;
-            box-shadow: 0 0 25px #cac6c6;
-        }
+                #login-page .login-form {
+                    -ms-flex-direction: column;
+                    flex-direction: column;
+                    width: 500px;
+                    height: 400px;
+                    border-radius: 10px;
+                    background: #fff;
+                    border: 1px solid #eaeaea;
+                    box-shadow: 0 0 25px #cac6c6;
+                }
 
-        #login-page .login-form .title {
-            color: #20a0ff;
-            font-weight: 700;
-            font-size: 40px;
-            text-align: center;
-            line-height: 2.2;
-            font-family: sans-serif;
-        }
+                    #login-page .login-form .title {
+                        color: #20a0ff;
+                        font-weight: 700;
+                        font-size: 40px;
+                        text-align: center;
+                        line-height: 2.2;
+                        font-family: sans-serif;
+                    }
 
-        #login-page .login-form .input-group {
-            margin-top: 30px;
-            width: 80%;
-        }
+                    #login-page .login-form .input-group {
+                        margin-top: 30px;
+                        width: 80%;
+                    }
 
-        #login-page .login-form .input-group button {
-            width: 100%;
-        }
+                        #login-page .login-form .input-group button {
+                            width: 100%;
+                        }
     </style>
 </head>
 <body>
@@ -129,24 +129,25 @@
                     var loginParams = { account: this.username, password: this.password };
                     this.isBtnLoading = true;
 
-                    requestLogin(loginParams).then(function (data) {
+                    requestLogin(loginParams).then(this.loginCallback);
+                },
+                loginCallback(data) {
 
-                        this.isBtnLoading = false;
-                        var msg = data.msg;
-                        var success = data.success;
-                        var user = data.body;
+                    this.isBtnLoading = false;
+                    var msg = data.msg;
+                    var success = data.success;
+                    var user = data.body;
 
-                        if (success) {
-                            localStorage.setItem('user', JSON.stringify(user));
-                            this.saveAccountPwd();
+                    if (success) {
+                        localStorage.setItem('user', JSON.stringify(user));
+                        this.saveAccountPwd();
 
-                            this.$message(msg);
-                            //跳转到主页
-                            window.location.href = "/TestA/Home/Index";
-                        } else {
-                            this.$message.error(msg);
-                        }
-                    });
+                        this.$message(msg);
+                        //跳转到主页
+                        window.location.href = "/TestA/Home/Index";
+                    } else {
+                        this.$message.error(msg);
+                    }
                 },
                 saveAccountPwd() {
                     if (this.rememberMe) {
@@ -157,13 +158,13 @@
                         localStorage.removeItem('account');
                         localStorage.removeItem('passowrd');
                     }
-                },
-
+                }
             },
             created: function () {
                 var account = localStorage.getItem('account');
                 var password = localStorage.getItem('passowrd');
                 if (account != null && password != null) {
+                    this.rememberMe = true;
                     this.username = account;
                     this.password = password;
                 }

@@ -146,6 +146,9 @@
     <Compile Include="Areas\TestA\Controllers\ResumeController.cs" />
     <Compile Include="Areas\TestA\Models\AccountLoginModel.cs" />
     <Compile Include="Areas\TestA\Models\CustomerListModel.cs" />
+    <Compile Include="Areas\TestA\Models\MenuModel.cs" />
+    <Compile Include="Areas\TestA\Models\PermissionModel.cs" />
+    <Compile Include="Areas\TestA\Models\AccountSessionModel.cs" />
     <Compile Include="Areas\TestA\TestAAreaRegistration.cs" />
     <Compile Include="Areas\TestB\Controllers\HomeController.cs" />
     <Compile Include="Areas\TestB\TestBAreaRegistration.cs" />
@@ -154,10 +157,20 @@
     <Compile Include="Areas\TestD\Controllers\HomeController.cs" />
     <Compile Include="Areas\TestD\TestDAreaRegistration.cs" />
     <Compile Include="Common\CommonJson.cs" />
+    <Compile Include="Common\CommonSession.cs" />
+    <Compile Include="Common\ConstantParam.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Entities\AdminVueModel.cs" />
     <Compile Include="Entities\Customer.cs" />
+    <Compile Include="Entities\Menu.cs" />
+    <Compile Include="Entities\Permission.cs" />
+    <Compile Include="Entities\Role.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Entities\vUserMenu.cs" />
+    <Compile Include="Entities\vUserPermission.cs" />
+    <Compile Include="Filters\DescriptionAttribute.cs" />
+    <Compile Include="Filters\RoleActionFilter.cs" />
+    <Compile Include="Filters\RoleAuthorizeAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -380,6 +393,7 @@
     <Content Include="Content\element\utils\util.js" />
     <Content Include="Content\element\utils\vdom.js" />
     <Content Include="Content\element\utils\vue-popper.js" />
+    <Content Include="Entities\说明.txt" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -414,6 +428,7 @@
     <Content Include="Areas\TestA\Views\Resume\Index.cshtml" />
     <Content Include="Areas\TestA\Views\Resume\TestForm.cshtml" />
     <Content Include="Areas\TestA\Views\Resume\SetRole.cshtml" />
+    <Content Include="App_Data\admin_vue2017-6-13.bak" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -445,7 +460,6 @@
     <Content Include="Views\Shared\_Layout-bak.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Areas\TestB\Models\" />
     <Folder Include="Areas\TestC\Models\" />
     <Folder Include="Areas\TestD\Models\" />

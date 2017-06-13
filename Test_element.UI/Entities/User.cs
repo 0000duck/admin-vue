@@ -9,6 +9,12 @@ namespace Test_element.UI.Entities
     [Table("User")]
     public partial class User
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public User()
+        {
+            Roles = new HashSet<Role>();
+        }
+
         public Guid Id { get; set; }
 
         [Required]
@@ -27,5 +33,8 @@ namespace Test_element.UI.Entities
         public string Avatar { get; set; }
 
         public DateTime? CreateTime { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Role> Roles { get; set; }
     }
 }
