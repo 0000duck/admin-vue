@@ -144,6 +144,8 @@
     <Compile Include="Areas\TestA\Controllers\CustomerController.cs" />
     <Compile Include="Areas\TestA\Controllers\HomeController.cs" />
     <Compile Include="Areas\TestA\Controllers\ResumeController.cs" />
+    <Compile Include="Areas\TestA\Controllers\SysRoleController.cs" />
+    <Compile Include="Areas\TestA\Controllers\SysUserController.cs" />
     <Compile Include="Areas\TestA\Models\AccountLoginModel.cs" />
     <Compile Include="Areas\TestA\Models\CustomerListModel.cs" />
     <Compile Include="Areas\TestA\Models\MenuModel.cs" />
@@ -157,6 +159,7 @@
     <Compile Include="Areas\TestD\Controllers\HomeController.cs" />
     <Compile Include="Areas\TestD\TestDAreaRegistration.cs" />
     <Compile Include="Common\CommonJson.cs" />
+    <Compile Include="Common\CommonMenu.cs" />
     <Compile Include="Common\CommonSession.cs" />
     <Compile Include="Common\ConstantParam.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -460,6 +463,8 @@
     <Content Include="Views\Shared\_Layout-bak.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\TestA\Views\SysRole\" />
+    <Folder Include="Areas\TestA\Views\SysUser\" />
     <Folder Include="Areas\TestB\Models\" />
     <Folder Include="Areas\TestC\Models\" />
     <Folder Include="Areas\TestD\Models\" />

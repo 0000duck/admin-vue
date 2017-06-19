@@ -64,8 +64,8 @@ namespace Test_element.UI.Areas.TestA.Controllers
 
             return new JsonResult() { ContentEncoding = Encoding.UTF8, Data = CommonJson.camelJson(ajaxResult) };
         }
-        
-        
+
+
         [HttpGet]
         public ActionResult LogOff()
         {
@@ -92,8 +92,8 @@ namespace Test_element.UI.Areas.TestA.Controllers
                 Account = user.Account,
                 NickName = user.NickName
             };
-            
-            var userMenus = db.vUserMenus.Where(p => p.UserId == user.Id).Select(pm => new MenuModel()
+
+            var userMenus = db.vUserMenus.Where(p => p.UserId == user.Id).OrderBy(p => p.OrderId).Select(pm => new MenuModel()
             {
                 MenuId = pm.Id,
                 MenuName = pm.Name,
@@ -115,7 +115,7 @@ namespace Test_element.UI.Areas.TestA.Controllers
             {
                 userSession.MenuList = userMenus;
                 userSession.PermissionDic = userPermissions.ToDictionary(k => k.Url, v => v.Name);
-                
+
                 Session[ConstantParam.SESSION_USER] = CommonSession.SessionSatae_Serialize(userSession);
             }
             catch (Exception ex)

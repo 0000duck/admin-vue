@@ -38,11 +38,10 @@ namespace Test_element.UI.Filters
             base.OnActionExecuting(filterContext);
         }
 
-
-        public override void OnResultExecuting(ResultExecutingContext filterContext)
+        public override void OnActionExecuted(ActionExecutedContext filterContext)
         {
 
-            base.OnResultExecuting(filterContext);
+            base.OnActionExecuted(filterContext);
         }
 
 

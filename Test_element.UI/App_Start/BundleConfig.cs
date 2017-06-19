@@ -23,9 +23,6 @@ namespace Test_element.UI
             bundles.Add(new ScriptBundle("~/bundles/axios").Include(
                       "~/Scripts/axios/axios.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/axios").Include(
-                      "~/Scripts/axios/axios.js"));
-
             #endregion
 
             #region 系统自带

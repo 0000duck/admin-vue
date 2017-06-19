@@ -16,15 +16,27 @@
     <div id="app">
         <el-menu theme="dark" default-active="activeIndex" class="el-menu-demo" mode="horizontal" v-on:select="handleSelect">
             <el-menu-item index="0">主基地</el-menu-item>
-            <el-menu-item index="1">
-                @Html.ActionLink("主页", "Index", "Home")
-            </el-menu-item>
             <el-menu-item index="2">
                 @Html.ActionLink("注销", "LogOff", "Account")
             </el-menu-item>
-            <el-menu-item index="3">
-                @Html.ActionLink("客户管理", "Index", "Customer")
-            </el-menu-item>
+            @{
+                var menuList = Test_element.UI.Common.CommonMenu.GetMenuList();
+
+                foreach (var item in menuList)
+                {
+                    var url = "/TestA" + item.MenuUrl;
+                    <el-menu-item index="1">
+                        <a href="@url">@item.MenuName</a>
+                    </el-menu-item>
+                }
+            }
+
+            @*<el-menu-item index="1">
+                    @Html.ActionLink("主页", "Index", "Home")
+                </el-menu-item>
+                <el-menu-item index="3">
+                    @Html.ActionLink("客户管理", "Index", "Customer")
+                </el-menu-item>*@
             @*<el-menu-item index="4">
                     @Html.ActionLink("简历管理", "Index", "Resume")
                 </el-menu-item>
