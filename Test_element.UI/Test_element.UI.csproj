@@ -151,6 +151,7 @@
     <Compile Include="Areas\TestA\Models\MenuModel.cs" />
     <Compile Include="Areas\TestA\Models\PermissionModel.cs" />
     <Compile Include="Areas\TestA\Models\AccountSessionModel.cs" />
+    <Compile Include="Areas\TestA\Models\UserListModel.cs" />
     <Compile Include="Areas\TestA\TestAAreaRegistration.cs" />
     <Compile Include="Areas\TestB\Controllers\HomeController.cs" />
     <Compile Include="Areas\TestB\TestBAreaRegistration.cs" />
@@ -432,6 +433,8 @@
     <Content Include="Areas\TestA\Views\Resume\TestForm.cshtml" />
     <Content Include="Areas\TestA\Views\Resume\SetRole.cshtml" />
     <Content Include="App_Data\admin_vue2017-6-13.bak" />
+    <Content Include="Areas\TestA\Views\SysUser\Index.cshtml" />
+    <Content Include="Areas\TestA\Views\SysRole\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -463,8 +466,6 @@
     <Content Include="Views\Shared\_Layout-bak.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\TestA\Views\SysRole\" />
-    <Folder Include="Areas\TestA\Views\SysUser\" />
     <Folder Include="Areas\TestB\Models\" />
     <Folder Include="Areas\TestC\Models\" />
     <Folder Include="Areas\TestD\Models\" />
