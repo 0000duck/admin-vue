@@ -25,23 +25,20 @@ namespace Test_element.UI.Areas.TestA.Controllers
             return View();
         }
 
-
         public JsonResult List(UserListModel model)
-        {
+        {//动态排序属性名要大小全字匹配，eg:"NickName"
+
             int page = model.page;
             int rowSize = model.rowSize;
-
             bool sortWay_order = model.sortWay_order;
-            string sortWay_prop = model.sortWay_prop;
+            string sortWay_prop = model.sortWay_prop.Substring(0, 1).ToUpper() + model.sortWay_prop.Substring(1);
 
             AjaxResult ajaxResult = null;
 
             var total = db.Users.Count();
-            object users = null;
-
-            if (sortWay_order)
-            {
-                users = db.Users.OrderBy(p => p.NickName).Skip(page * rowSize).Take(rowSize).Select(p => new
+            var users = CommonLinq.Sort(db.Users.Where(p => true), sortWay_prop, sortWay_order)
+                .Skip(page * rowSize).Take(rowSize)
+                .Select(p => new
                 {
                     Id = p.Id,
                     Account = p.Account,
@@ -50,19 +47,6 @@ namespace Test_element.UI.Areas.TestA.Controllers
                     Avatar = p.Avatar,
                     CreateTime = p.CreateTime
                 }).ToList();
-            }
-            else
-            {
-                users = db.Users.OrderByDescending(p => p.NickName).Skip(page * rowSize).Take(rowSize).Select(p => new
-                {
-                    Id = p.Id,
-                    Account = p.Account,
-                    NickName = p.NickName,
-                    Password = p.Password,
-                    Avatar = p.Avatar,
-                    CreateTime = p.CreateTime
-                }).ToList();
-            }
 
             ajaxResult = new AjaxResult()
             {

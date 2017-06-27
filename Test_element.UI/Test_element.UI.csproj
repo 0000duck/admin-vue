@@ -60,6 +60,10 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Linq.Dynamic, Version=1.0.6132.35681, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.Dynamic.1.0.7\lib\net40\System.Linq.Dynamic.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -160,6 +164,7 @@
     <Compile Include="Areas\TestD\Controllers\HomeController.cs" />
     <Compile Include="Areas\TestD\TestDAreaRegistration.cs" />
     <Compile Include="Common\CommonJson.cs" />
+    <Compile Include="Common\CommonLinq.cs" />
     <Compile Include="Common\CommonMenu.cs" />
     <Compile Include="Common\CommonSession.cs" />
     <Compile Include="Common\ConstantParam.cs" />
